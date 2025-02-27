@@ -5,6 +5,11 @@ date: "2025-02-27"
 output: html_document
 ---
 
+`## Introduction`
+
+`This R Markdown document demonstrates my abilities to use models for data analysis using a data set collected on crickets.`
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
