@@ -15,6 +15,7 @@ data(crickets, package = "modeldata")
 names(crickets)
 ```
 ````
+`## What is that sound?`
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
