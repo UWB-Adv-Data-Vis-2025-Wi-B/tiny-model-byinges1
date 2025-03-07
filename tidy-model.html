@@ -373,13 +373,25 @@ chunk like this:</p>
 <pre><code></code></pre>
 <p><code>##What is that sound?</code>
 <code>In this report, we examine what factors predict a cricket&#39;s chirp rate.</code></p>
-<pre><code></code></pre>
-<p>data(crickets, package = “modeldata”) library(ggplot2)
-summary(crickets) # Summarize the data</p>
-<p>ggplot(crickets, aes(x = rate)) + geom_histogram(bins = 8) +
-ggtitle(“Distribution of the chirp rate of crickets”) + xlab(‘Chirp rate
-(per min.)’)</p>
-<p>````</p>
+<pre><code>
+```
+##              species        temp            rate       
+##  O. exclamationis:14   Min.   :17.20   Min.   : 44.30  
+##  O. niveus       :17   1st Qu.:20.80   1st Qu.: 59.45  
+##                        Median :24.00   Median : 76.20  
+##                        Mean   :23.76   Mean   : 72.89  
+##                        3rd Qu.:26.35   3rd Qu.: 85.25  
+##                        Max.   :30.40   Max.   :101.70
+```
+
+&lt;img src=&quot;tidy-model_files/figure-html/summary-1.png&quot; width=&quot;672&quot; /&gt;</code></pre>
+<p><code>## Temperature affects chirp rate</code></p>
+<pre><code>
+```
+## `geom_smooth()` using formula = &#39;y ~ x&#39;
+```
+
+&lt;img src=&quot;tidy-model_files/figure-html/temp-1.png&quot; width=&quot;672&quot; /&gt;</code></pre>
 <pre class="r"><code>summary(cars)</code></pre>
 <pre><code>##      speed           dist       
 ##  Min.   : 4.0   Min.   :  2.00  
