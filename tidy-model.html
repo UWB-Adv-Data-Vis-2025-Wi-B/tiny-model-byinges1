@@ -357,11 +357,10 @@ display: none;
 </div>
 
 
-<p><code>## Introduction</code></p>
-<p><code>This R Markdown document demonstrates my abilities to use models for data analysis using a data set collected on crickets.</code></p>
-<pre><code></code></pre>
-<p><code>## What is that sound?</code></p>
-<p>library(tidyverse) library(modeldata) ## R Markdown</p>
+<p>knitr::opts_chunk$set(echo = TRUE) library(tidyverse)
+library(modeldata) library(ggplot2)</p>
+<div id="r-markdown" class="section level2">
+<h2>R Markdown</h2>
 <p>This is an R Markdown document. Markdown is a simple formatting
 syntax for authoring HTML, PDF, and MS Word documents. For more details
 on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
@@ -369,6 +368,18 @@ on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http:
 generated that includes both content as well as the output of any
 embedded R code chunks within the document. You can embed an R code
 chunk like this:</p>
+<p><code>Introduction</code></p>
+<p><code>This R Markdown document demonstrates my abilities to use models for data analysis using a data set collected on crickets.</code></p>
+<pre><code></code></pre>
+<p><code>##What is that sound?</code>
+<code>In this report, we examine what factors predict a cricket&#39;s chirp rate.</code></p>
+<pre><code></code></pre>
+<p>data(crickets, package = “modeldata”) library(ggplot2)
+summary(crickets) # Summarize the data</p>
+<p>ggplot(crickets, aes(x = rate)) + geom_histogram(bins = 8) +
+ggtitle(“Distribution of the chirp rate of crickets”) + xlab(‘Chirp rate
+(per min.)’)</p>
+<p>````</p>
 <pre class="r"><code>summary(cars)</code></pre>
 <pre><code>##      speed           dist       
 ##  Min.   : 4.0   Min.   :  2.00  
@@ -377,6 +388,7 @@ chunk like this:</p>
 ##  Mean   :15.4   Mean   : 42.98  
 ##  3rd Qu.:19.0   3rd Qu.: 56.00  
 ##  Max.   :25.0   Max.   :120.00</code></pre>
+</div>
 <div id="including-plots" class="section level2">
 <h2>Including Plots</h2>
 <p>You can also embed plots, for example:</p>

@@ -4,8 +4,18 @@ author: "betty yinges"
 date: "2025-02-27"
 output: html_document
 ---
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(modeldata)
+library(ggplot2)
 
-`## Introduction`
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+`Introduction`
 
 `This R Markdown document demonstrates my abilities to use models for data analysis using a data set collected on crickets.`
 
@@ -15,19 +25,26 @@ data(crickets, package = "modeldata")
 names(crickets)
 ```
 ````
-`## What is that sound?`
+`##What is that sound?`
+`In this report, we examine what factors predict a cricket's chirp rate.`
+
+````
+````
+data(crickets, package = "modeldata")
+library(ggplot2)
+```{r summary, echo = FALSE}
+summary(crickets)
+ggplot(crickets, aes(x = rate)) +
+  geom_histogram(bins = 8) + 
+  ggtitle("Distribution of the chirp rate of crickets") +
+  xlab('Chirp rate (per min.)')
+```
+````
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-library(tidyverse)
-library(modeldata)
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r cars}
 summary(cars)
