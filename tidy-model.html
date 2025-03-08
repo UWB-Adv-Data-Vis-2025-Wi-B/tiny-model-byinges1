@@ -391,7 +391,29 @@ chunk like this:</p>
 ## `geom_smooth()` using formula = &#39;y ~ x&#39;
 ```
 
-&lt;img src=&quot;tidy-model_files/figure-html/temp-1.png&quot; width=&quot;672&quot; /&gt;</code></pre>
+&lt;img src=&quot;tidy-model_files/figure-html/temp-1.png&quot; width=&quot;672&quot; /&gt;
+
+```
+## 
+## Call:
+## lm(formula = rate ~ temp, data = crickets)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -8.7044 -2.5789 -0.4466  4.5353  7.5916 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -27.9476     5.5937  -4.996 2.56e-05 ***
+## temp          4.2431     0.2325  18.251  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.868 on 29 degrees of freedom
+## Multiple R-squared:  0.9199, Adjusted R-squared:  0.9171 
+## F-statistic: 333.1 on 1 and 29 DF,  p-value: &lt; 2.2e-16
+```</code></pre>
+<p><code>Based on a scatter plot of temperature and chirping and a correlation test, it seems that as temperature increases one degree, the rate of chirping increases about 4.2 chirps per minute.</code></p>
 <pre class="r"><code>summary(cars)</code></pre>
 <pre><code>##      speed           dist       
 ##  Min.   : 4.0   Min.   :  2.00  
