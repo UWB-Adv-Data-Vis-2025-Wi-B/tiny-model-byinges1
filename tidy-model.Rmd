@@ -1,0 +1,192 @@
+---
+title: "tidy-model"
+author: "betty yinges"
+date: "2025-02-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+## Setup & Loading Packages
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(modeldata)
+library(ggplot2)
+
+```
+
+## Introduction
+
+`This R Markdown document demonstrates my abilities to use models for data analysis using a data set collected on crickets.`
+
+```{r}
+data(crickets, package = "modeldata")
+names(crickets)
+```
+
+## What is that sound?
+`In this report, I examine what factors predict a cricket's chirp rate.`
+
+```{r}
+summary(crickets)
+
+ggplot(crickets, aes(x = rate)) + 
+  geom_histogram(bins = 10, fill = "skyblue", color = "black") + 
+  ggtitle("Distribution of Chirp Rates") + 
+  xlab('Chirp Rate (per min.)') + 
+  theme_minimal()
+
+```
+```
+Observations:
+
+- The chirp rate varies among crickets.
+- The distribution helps us understand the variation in chirping frequency.
+```
+
+## Temperature affects chirp rate
+```
+I now investigate the relationship between temperature and chirp rate.
+
+```
+```{r}
+ggplot(crickets, aes(x = temp, y = rate)) + 
+  geom_jitter(alpha = 0.6, color = "blue") + 
+  geom_smooth(method = 'lm', color = "red", fill = "lightgray") + 
+  ggtitle("Temperature vs. Chirp Rate") + 
+  ylab('Chirp Rate (per min.)') + 
+  xlab('Temperature (°C)') + 
+  theme_minimal()
+
+# Fit linear model: chirp rate ~ temperature
+temp_lm <- lm(rate ~ temp, data = crickets)
+
+# Display model summary
+summary(temp_lm)
+
+
+```
+`Findings:`
+
+`Chirp rate increases as temperature increases.`
+
+`Based on a scatter plot of temperature and chirping and a correlation test, it seems that as temperature increases one degree, the rate of chirping increases about 4.2 chirps per minute.` 
+
+## Species-specific effects of temperature on chirping
+
+`Now, I check if species differences affect chirp rate.`
+
+## Scatter Plot with Species Coloring
+```{r}
+ggplot(crickets, aes(x = temp, y = rate, color = species)) + 
+  geom_jitter(alpha = 0.6) + 
+  geom_smooth(method = 'lm', se = FALSE) + 
+  ggtitle("Temperature vs. Chirp Rate by Species") + 
+  ylab('Chirp Rate (per min.)') + 
+  xlab('Temperature (°C)') + 
+  theme_minimal()
+
+# Fit linear model including species
+species_lm <- lm(rate ~ temp + species, data = crickets)
+
+# Display model summary
+summary(species_lm)
+```
+
+`Key Insights:`
+
+`Different species have different chirp rates.`
+`The model shows that O. exclamationis chirps more frequently than O. niveus.`
+
+
+
+
+## Exploring Interactions Between Temperature & Species
+`Here, I investigate whether temperature effects vary between species.`
+
+## Chirp Rate Histogram by Species
+
+```{r}
+ggplot(crickets, aes(x = rate, fill = species)) + 
+  geom_histogram(position = 'identity', alpha = 0.7, bins = 10) + 
+  ggtitle("Chirp Rate Distribution by Species") + 
+  xlab('Chirp Rate (per min.)') + 
+  theme_minimal()
+
+```
+## Interaction Model: Temperature & Species
+```{r}
+ggplot(crickets, aes(x = temp, y = rate, color = species)) + 
+  geom_jitter(alpha = 0.6) + 
+  geom_smooth(method = 'lm', se = FALSE) + 
+  ggtitle("Temperature vs. Chirp Rate (with Interaction)") + 
+  ylab('Chirp Rate (per min.)') + 
+  xlab('Temperature (°C)') + 
+  theme_minimal()
+
+```
+`Fitting an Interaction Model`
+```{r}
+# Fit a model with interaction term
+species_x_temp_lm <- lm(rate ~ temp * species, data = crickets)
+
+# Display model summary
+summary(species_x_temp_lm)
+
+# Compare with previous species model using ANOVA
+anova(species_lm, species_x_temp_lm)
+```
+`Findings:`
+
+`The interaction model does not significantly improve predictions.`
+`The simpler species_lm model is sufficient.`
+
+
+## Diamond Price Analysis
+```
+`Using these skills to a different dataset: the diamonds dataset    
+
+The following model predicts diamond prices based on carat weight, cut, clarity, and color.
+```
+
+```{r}
+data(diamonds, package = "ggplot2")
+
+ggplot(diamonds, aes(x = carat, y = price)) + 
+  geom_point(alpha = 0.3, color = "purple") + 
+  geom_smooth(method = 'lm', se = FALSE, color = "red") + 
+  ggtitle("Diamond Carat vs. Price") + 
+  xlab('Carat') + 
+  ylab('Price ($)') + 
+  theme_minimal()
+diamonds_lm <- lm(price ~ carat + cut + clarity + color, data = diamonds)
+summary(diamonds_lm)
+
+```
+```
+The linear model suggests that carat weight is the strongest predictor of diamond price,
+while cut, clarity, and color also contribute to variations in price.
+```
+```{r}
+# Fit a linear model predicting diamond prices
+diamonds_lm <- lm(price ~ carat + cut + clarity + color, data = diamonds)
+
+# Display model summary
+summary(diamonds_lm)
+
+
+```
+
+```
+Key Takeaways:
+
+Carat weight is the strongest predictor of diamond price.
+Cut, clarity, and color also impact pricing. 
+```
+## Conclusion
+
+```
+This analysis demonstrates how linear regression models can be used to study relationships in data, such as:
+✅ Temperature affecting chirp rate in crickets.
+✅ Species differences in chirp rate.
+✅ Predicting diamond prices based on multiple factors.
+```
